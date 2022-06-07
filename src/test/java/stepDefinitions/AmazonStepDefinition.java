@@ -67,4 +67,42 @@ public class AmazonStepDefinition {
 		amazon.aramakutusu.sendKeys("Iphone"+ Keys.ENTER);
 
 	}
+
+	@Given("kullanici {string} icin arama yapar")
+	public void kullanici_icin_arama_yapar(String istenenKelime) {
+		Amazon amazon=new Amazon();
+		amazon.aramakutusu.sendKeys(istenenKelime+ Keys.ENTER);
+
+	}
+	@Given("sonuclarin {string} icerdigini test eder")
+	public void sonuclarin_icerdigini_test_eder(String istenenKelime) {
+		Amazon amazon=new Amazon();
+		String aranankelime=istenenKelime;
+		String actualAramaSonucElementi=amazon.aramaSonucElementi.getText();
+		Assert.assertTrue(actualAramaSonucElementi.contains(aranankelime));
+	}
+
+	@Given("kullanici {string} ana sayfasinda")
+	public void kullanici_ana_sayfasinda(String istenenUrl) {
+	Driver.getDriver().get(ConfigReader.getProperty(istenenUrl));
+
+
+	}
+	@Given("url'in  {string} icerdigini test eder")
+	public void url_in_icerdigini_test_eder(String istenenKelime) {
+		Amazon amazon=new Amazon();
+		istenenKelime=ConfigReader.getProperty(istenenKelime);
+		String actualUrl=Driver.getDriver().getCurrentUrl();
+		Assert.assertTrue(actualUrl.contains(istenenKelime));
+	}
+
+	@Then("kullanici {int} sn bekler")
+	public void kullaniciSnBekler(int istenenSaniye) {
+		try {
+			Thread.sleep(istenenSaniye*1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+	}
 }
