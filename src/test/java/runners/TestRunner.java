@@ -1,28 +1,31 @@
 package runners;
 
-import io.cucumber.java.en.And;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)//jUnit den geliyor
 @CucumberOptions(
+		plugin={"html:target/cucumber-reports.html",
+				"json:target/json-reports/cucumber.json",
+				"junit:target/xml-report/cucumber.xml"
+		},
 		features = "src/test/resources/features",
 		glue = "stepDefinitions",
-		tags = "@heroku",
+		tags = "@autumatioUrl",
 		dryRun = true
 )
-public class Runner {
+public class TestRunner {
 	/*
 	Bir framework de bir tek runner class ı yeterli olabilir.
-	Runner classında class body sinde  hiç bir şey olmaz.
-	Runner classımızı önemli yapan iki adet annotation vardır.
+	TestRunner classında class body sinde  hiç bir şey olmaz.
+	TestRunner classımızı önemli yapan iki adet annotation vardır.
 	bu Runwit() yüzünden JUnit ile yüklendi cucumbre.
 	@RunWith(Cucumber.class) notasyonu runner classına çalışma özelliği katar.
 	Bu notation olduğu için cucumber freamwork ümüzde JUnit kullanmayı tercih
 	ediyoruz.
 
-	feature: Runner dosyasının feature dosyalarını nereden bulacağını tarif eder.
+	feature: TestRunner dosyasının feature dosyalarını nereden bulacağını tarif eder.
 	glue: Step definitions dosyalarını nerede bulacağımızı gösterir.
 	tags: o an hangi tagı çalıştırmak istiyorsak onu belli eder.
 
